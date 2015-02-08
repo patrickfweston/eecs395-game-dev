@@ -34,4 +34,10 @@ public class Runner : MonoBehaviour {
 		transform.Translate(0f, 0f, -5f * Time.deltaTime);
 	}
 
+//	void OnCollisionEnter(Collision col){
+//		//		Debug.Log ("got pizza");
+//		if (col.gameObject.name == "Pizza") {
+//			Destroy(col.gameObject);
+//		}
+//	}
 }

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EatPizza : MonoBehaviour {
+public class Pizza : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col){
 //		Debug.Log ("got pizza");
-		if (col.gameObject.name == "Pizza") {
-			Destroy(col.gameObject);
+		if (col.gameObject.name == "Runner") {
+			Destroy(gameObject);
 		}
 	}
 }
