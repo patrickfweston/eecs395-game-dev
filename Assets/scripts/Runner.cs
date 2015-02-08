@@ -33,4 +33,5 @@ public class Runner : MonoBehaviour {
 	void move_backward() {
 		transform.Translate(0f, 0f, -5f * Time.deltaTime);
 	}
+
 }
