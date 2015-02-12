@@ -4,8 +4,8 @@ using System.Collections;
 public class Manager : MonoBehaviour {
 	public Boss BossPrefab;
 	public Pizza PizzaPrefab;
-	int NumOfPizza = 10;
-	int NumOfBoss = 1;
+	public int NumOfPizza;
+	public int NumOfBoss;
 	// Use this for initialization
 	
 	void Start () {
