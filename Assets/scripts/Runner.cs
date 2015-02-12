@@ -3,24 +3,21 @@
 public class Runner : MonoBehaviour {
 
 	void Update () {
+		move_character();
+	}
+
+	void move_character() {
 		if (Input.GetKey ("right")) {
 			move_right ();
-
 		}
-
 		if (Input.GetKey ("left")) {
-			move_left ();
-	
+			move_left ();	
 		}
-
 		if (Input.GetKey ("up")) {
-			move_forward();
-
+			move_forward();	
 		}
-
 		if (Input.GetKey ("down")) {
-			move_backward();
-
+			move_backward();	
 		}
 	}
 
