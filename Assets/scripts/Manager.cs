@@ -5,7 +5,7 @@ public class Manager : MonoBehaviour {
 	public Boss BossPrefab;
 	public Pizza PizzaPrefab;
 	int NumOfPizza = 10;
-	int NumOfBoss = 3;
+	int NumOfBoss = 1;
 	// Use this for initialization
 	
 	void Start () {
@@ -21,7 +21,7 @@ public class Manager : MonoBehaviour {
 	void generate_pizza(){
 		for (int i = 0; i < NumOfPizza; i++) {
 			Pizza newpizza = Instantiate(PizzaPrefab) as Pizza;
-			newpizza.name = "boss" + i;
+			newpizza.name = "pizza" + i;
 			newpizza.transform.localPosition =
 				new Vector3(Random.Range(-20,20), 0, Random.Range(-20,20));
 		}

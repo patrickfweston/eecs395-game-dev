@@ -6,13 +6,19 @@ public class Runner : MonoBehaviour {
 		if (Input.GetKey ("right")) {
 			move_right ();
 
-		} else if (Input.GetKey ("left")) {
+		}
+
+		if (Input.GetKey ("left")) {
 			move_left ();
 	
-		} else if (Input.GetKey ("up")) {
+		}
+
+		if (Input.GetKey ("up")) {
 			move_forward();
 
-		} else if (Input.GetKey ("down")) {
+		}
+
+		if (Input.GetKey ("down")) {
 			move_backward();
 
 		}
