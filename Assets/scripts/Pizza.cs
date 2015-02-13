@@ -7,6 +7,8 @@ public class Pizza : MonoBehaviour {
 //		Debug.Log ("got pizza");
 		if (col.gameObject.name == "Runner") {
 			Destroy(gameObject);
+			Runner.incrementPizzaBy(1);
 		}
 	}
+
 }
