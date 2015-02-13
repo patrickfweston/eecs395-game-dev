@@ -12,7 +12,7 @@ public class Boss : MonoBehaviour {
 		Color oldColor = gameObject.renderer.material.color;
 		gameObject.renderer.material.color = Color.Lerp(oldColor, angry, Time.deltaTime * smooth);
 	}
-
+	 
 	void Calm(){
 		gameObject.renderer.material.color = calm;
 	}
