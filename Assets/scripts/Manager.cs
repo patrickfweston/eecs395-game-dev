@@ -17,7 +17,9 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(BeginGame());
+		generate_pizza ();
+		generate_boss();
+		/*StartCoroutine(BeginGame());*/
 	}
 	
 	// Update is called once per frame
@@ -25,16 +27,19 @@ public class Manager : MonoBehaviour {
 		
 	}
 
-	private IEnumerator BeginGame () {
-		mapInstance = Instantiate(mapPrefab) as Map;
-		yield return StartCoroutine(mapInstance.Generate_map());
+	private void BeginGame () {
+		/*mapInstance = Instantiate(mapPrefab) as Map;
+		yield return StartCoroutine(mapInstance.Generate_map());*/
 		generate_pizza ();
 		generate_boss();
+
 	}
 
 	void generate_pizza(){
-		float xlimit = mapInstance.size.x * 0.5f - 0.5f;
-		float zlimit = mapInstance.size.z * 0.5f - 0.5f;
+		float xlimit = 10;
+		float zlimit = 10;
+		/*float xlimit = mapInstance.size.x * 0.5f - 0.5f;
+		float zlimit = mapInstance.size.z * 0.5f - 0.5f;*/
 		pizzas = new Pizza[NumOfPizza];
 		for (int i = 0; i < NumOfPizza; i++) {
 			Pizza newpizza = Instantiate(PizzaPrefab) as Pizza;
@@ -46,16 +51,18 @@ public class Manager : MonoBehaviour {
 	}
 	
 	void generate_boss(){
-		float xlimit = mapInstance.size.x * 0.5f - 0.5f;
-		float zlimit = mapInstance.size.z * 0.5f - 0.5f;
+		float xlimit = 10;
+		float zlimit = 10;
+		/*float xlimit = mapInstance.size.x * 0.5f - 0.5f;
+		float zlimit = mapInstance.size.z * 0.5f - 0.5f;*/
 
 		bosses = new Boss[NumOfBoss];
 		for (int i = 0; i < NumOfBoss; i++) {
 			Boss newboss = Instantiate(BossPrefab) as Boss;
 			bosses[i] = newboss;
 			newboss.name = "boss" + i;
-			newboss.transform.localPosition =
-				new Vector3(Random.Range(-xlimit,xlimit), 0f, Random.Range(-zlimit,zlimit));
+			/*newboss.transform.localPosition =
+				new Vector3(Random.Range(-xlimit,xlimit), 0f, Random.Range(-zlimit,zlimit));*/
 		}
 	}
 	
