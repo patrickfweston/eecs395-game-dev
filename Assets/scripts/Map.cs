@@ -22,7 +22,7 @@ public class Map : MonoBehaviour {
 	private MapCell GetNeighbor(MapCell cell, CellDirection direction){
 		MapCell neighbor = null;
 		IntVector2 coordinates = cell.coordinates + direction.ToIntVector2();
-		if(CoordMakeSense(coordinates)) neighbor = GetCell(cell.coordinates);
+		if(CoordMakeSense(coordinates)) neighbor = GetCell(coordinates);
 		return neighbor;
 	}
 
@@ -121,8 +121,8 @@ public class Map : MonoBehaviour {
 
 		if(CoordMakeSense(coord)){
 			Debug.Log ("NW");
-//			Debug.Log (coord.x);
-//			Debug.Log (coord.z);
+			Debug.Log (coord.x);
+			Debug.Log (coord.z);
 			MapCell NWCell = GetCell(coord);
 			CreateRoomEdge(NWCell, CellDirection.North, edge_cell_num,ref door_pos);
 
@@ -131,8 +131,8 @@ public class Map : MonoBehaviour {
 		coord = center +  (CellDirection.North.ToIntVector2() + CellDirection.East.ToIntVector2()) * radius;
 		if(CoordMakeSense(coord)){
 			Debug.Log ("NE");
-//			Debug.Log (coord.x);
-//			Debug.Log (coord.z);
+			Debug.Log (coord.x);
+			Debug.Log (coord.z);
 			MapCell NECell = GetCell(coord);
 			CreateRoomEdge(NECell, CellDirection.East, edge_cell_num,ref door_pos);
 		}
@@ -142,8 +142,8 @@ public class Map : MonoBehaviour {
 		Debug.Log (coord.z);
 		if(CoordMakeSense(coord)){
 			Debug.Log ("ES");
-//			Debug.Log (coord.x);
-//			Debug.Log (coord.z);
+			Debug.Log (coord.x);
+			Debug.Log (coord.z);
 			MapCell ESCell = GetCell(coord);
 			CreateRoomEdge(ESCell, CellDirection.South, edge_cell_num,ref door_pos);
 		}
@@ -152,8 +152,8 @@ public class Map : MonoBehaviour {
 
 		if(CoordMakeSense(coord)){
 			Debug.Log ("SW");
-//			Debug.Log (coord.x);
-//			Debug.Log (coord.z);
+			Debug.Log (coord.x);
+			Debug.Log (coord.z);
 			MapCell SWCell = GetCell(coord);
 			CreateRoomEdge(SWCell, CellDirection.West, edge_cell_num,ref door_pos);
 
