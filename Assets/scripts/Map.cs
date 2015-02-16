@@ -91,6 +91,9 @@ public class Map : MonoBehaviour {
 	}
 
 	private void CreateRooms(IntVector2 center, int radius){
+		int edge_cell_num = radius*2+1;
+		int door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4);
+		Debug.Log (door_pos);
 
 		IntVector2 coord = center +  (CellDirection.North.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
 		MapCell NWCell = GetCell(coord);
@@ -101,14 +104,16 @@ public class Map : MonoBehaviour {
 		coord = center +  (CellDirection.South.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
 		MapCell SWCell = GetCell(coord);
 
-		CreateRoomEdge(NWCell, CellDirection.East, radius*2+1);
-		CreateRoomEdge(NECell, CellDirection.South, radius*2+1);
-		CreateRoomEdge(ESCell, CellDirection.West, radius*2+1);
-		CreateRoomEdge(SWCell, CellDirection.North, radius*2+1);
+		CreateRoomEdge(NWCell, CellDirection.East, edge_cell_num,ref door_pos);
+		CreateRoomEdge(NECell, CellDirection.South, edge_cell_num,ref door_pos);
+		CreateRoomEdge(ESCell, CellDirection.West, edge_cell_num,ref door_pos);
+		CreateRoomEdge(SWCell, CellDirection.North, edge_cell_num,ref door_pos);
 	
 	}
 
-	private void CreateRoomEdge(MapCell startCell, CellDirection direction, int repitition){
+	private void CreateRoomEdge(MapCell startCell, CellDirection direction, int repitition, ref int door_pos){
+
+
 		IntVector2[] vectors = {
 			new IntVector2(1, 0),
 			new IntVector2(0, -1),
@@ -116,9 +121,14 @@ public class Map : MonoBehaviour {
 			new IntVector2(0, 1)
 		};
 
-		for(int i = 0; i< repitition; i++){
-			MapCell neighbor = GetNeighbor(startCell, direction);
-			CreateWall (startCell, neighbor, direction);
+		for(int i = 0; i< repitition; i++, door_pos--){
+			Debug.Log (door_pos);
+			if(door_pos != 0) {
+				MapCell neighbor = GetNeighbor(startCell, direction);
+				CreateWall (startCell, neighbor, direction);
+			}
+
+
 			startCell = GetCell(startCell.coordinates + vectors[(int)direction]);
 		}
 	}
