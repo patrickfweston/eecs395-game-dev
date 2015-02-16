@@ -17,9 +17,7 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		generate_pizza ();
-		generate_boss();
-		/*StartCoroutine(BeginGame());*/
+		StartCoroutine(BeginGame());
 	}
 	
 	// Update is called once per frame
@@ -27,9 +25,9 @@ public class Manager : MonoBehaviour {
 		
 	}
 
-	private void BeginGame () {
-		/*mapInstance = Instantiate(mapPrefab) as Map;
-		yield return StartCoroutine(mapInstance.Generate_map());*/
+	private IEnumerator BeginGame () {
+		mapInstance = Instantiate(mapPrefab) as Map;
+		yield return StartCoroutine(mapInstance.Generate_map());
 		generate_pizza ();
 		generate_boss();
 
