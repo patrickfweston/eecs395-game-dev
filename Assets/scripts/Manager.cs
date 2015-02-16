@@ -27,7 +27,7 @@ public class Manager : MonoBehaviour {
 
 	private IEnumerator BeginGame () {
 		mapInstance = Instantiate(mapPrefab) as Map;
-		yield return StartCoroutine(mapInstance.Generate());
+		yield return StartCoroutine(mapInstance.Generate_map());
 		generate_pizza ();
 		generate_boss();
 	}
