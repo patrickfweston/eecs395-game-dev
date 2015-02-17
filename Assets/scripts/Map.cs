@@ -142,7 +142,7 @@ public class Map : MonoBehaviour {
 			CreateRoomEdge(SWCell, CellDirection.West, edge_cell_num,ref door_pos, ref door);
 		}
 
-		while(!door){
+		if(!door){
 			door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
 			CreateRooms(center, radius);
 		}
