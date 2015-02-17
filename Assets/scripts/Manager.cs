@@ -10,8 +10,8 @@ public class Manager : MonoBehaviour {
 
 	//member varaibles
 	private Map mapInstance;
-	public Pizza[] pizzas;
-	public Boss[] bosses;
+	private Pizza[] pizzas;
+	private Boss[] bosses;
 	public int NumOfPizza;
 	public int NumOfBoss;
 

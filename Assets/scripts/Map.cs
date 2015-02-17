@@ -63,7 +63,7 @@ public class Map : MonoBehaviour {
 		IntVector2 Center8 = new IntVector2(12,21);
 
 		IntVector2 Center9 = new IntVector2(21,21);
-	CreateRoom(Center1, 3);
+		CreateRoom(Center1, 3);
 		CreateRoom(Center2, 3);
 		CreateRoom(Center3, 3);
 		CreateRoom(Center4, 3);
@@ -119,9 +119,9 @@ public class Map : MonoBehaviour {
 	private void CreateRoom(IntVector2 center, int radius){
 		int edge_cell_num = radius*2+1;
 		bool door = false;
-		//Debug.Log("---------");
+		Debug.Log("---------");
 		while(!door){
-			//Debug.Log("====");
+			Debug.Log("====");
 			CreateRoom_(center, radius, ref door, edge_cell_num);
 		}
 
@@ -130,7 +130,7 @@ public class Map : MonoBehaviour {
 	private void CreateRoom_(IntVector2 center, int radius,ref bool door, int edge_cell_num){
 		
 		int door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
-		//Debug.Log(door_pos);
+		Debug.Log(door_pos);
 		
 		IntVector2 coord = center + (CellDirection.North.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
 		
@@ -171,7 +171,7 @@ public class Map : MonoBehaviour {
 		
 		
 		for(int i = 0; i< repitition; i++,door_pos--){
-			//Debug.Log(i);
+			Debug.Log(i);
 			MapCell neighbor = GetNeighbor(startCell, direction);
 			IntVector2 next = startCell.coordinates + vectors[(int)direction];
 			if(door_pos == 0) {
@@ -179,7 +179,7 @@ public class Map : MonoBehaviour {
 					door_pos++;
 				}
 				else {
-					//Debug.Log ("!");
+					Debug.Log ("!");
 					
 					startCell.GetEdge(direction).dest();
 					neighbor.GetEdge(direction.GetOpposite()).dest();
