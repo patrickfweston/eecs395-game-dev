@@ -142,44 +142,44 @@ public class Map : MonoBehaviour {
 			CreateRoomEdge(SWCell, CellDirection.West, edge_cell_num,ref door_pos, ref door);
 		}
 
-//		while(!door){
-//			door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
-//			CreateRooms(center, radius);
-//		}
+		if(!door){
+			door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
+			CreateRooms(center, radius);
+		}
 
 	}
 
 	private void CreateRoomEdge(MapCell startCell, CellDirection direction, int repitition, ref int door_pos, ref bool door){
 
 
-//		IntVector2[] vectors = {
-//			new IntVector2(1, 0),
-//			new IntVector2(0, -1),
-//			new IntVector2(-1, 0),
-//			new IntVector2(0, 1)
-//		};
-//
-//
-//		for(int i = 0; i< repitition; i++,door_pos--){
-//			MapCell neighbor = GetNeighbor(startCell, direction);
-//			IntVector2 next = startCell.coordinates + vectors[(int)direction];
-//			if(door_pos == 0) {
-//				if(neighbor == null){
-//					door_pos++;
-//				}
-//				else {
-//					if(CoordMakeSense(next)) startCell = GetCell(next);
-//					door = true;
-//					continue;
-//				}
-//
-//			}
-//
-//			CreateWall (startCell, neighbor, direction);
-//
-//			if(CoordMakeSense(next)) startCell = GetCell(next);
-//
-//		}
+		IntVector2[] vectors = {
+			new IntVector2(1, 0),
+			new IntVector2(0, -1),
+			new IntVector2(-1, 0),
+			new IntVector2(0, 1)
+		};
+
+
+		for(int i = 0; i< repitition; i++,door_pos--){
+			MapCell neighbor = GetNeighbor(startCell, direction);
+			IntVector2 next = startCell.coordinates + vectors[(int)direction];
+			if(door_pos == 0) {
+				if(neighbor == null){
+					door_pos++;
+				}
+				else {
+					if(CoordMakeSense(next)) startCell = GetCell(next);
+					door = true;
+					continue;
+				}
+
+			}
+
+			CreateWall (startCell, neighbor, direction);
+
+			if(CoordMakeSense(next)) startCell = GetCell(next);
+
+		}
 	}
 
 }
