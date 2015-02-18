@@ -199,6 +199,11 @@ public class Map : MonoBehaviour {
 		catch(Exception){
 			Debug.Log("wrong reading file");
 			return false;
+
+		// From: boss-ai branch
+		//		if(!door){
+		//			door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
+		//			CreateRooms(center, radius);
 		}
 	}
 

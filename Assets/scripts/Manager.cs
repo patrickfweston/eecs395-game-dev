@@ -30,6 +30,7 @@ public class Manager : MonoBehaviour {
 		mapInstance.load_map_from_file("Assets/map_data");
 		generate_pizza ();
 		generate_boss();
+
 	}
 
 	void generate_pizza(){
@@ -54,6 +55,7 @@ public class Manager : MonoBehaviour {
 			Boss newboss = Instantiate(BossPrefab) as Boss;
 			bosses[i] = newboss;
 			newboss.name = "boss" + i;
+
 			newboss.transform.localPosition =
 				new Vector3(Random.Range(-xlimit,xlimit), 0, Random.Range(-zlimit,zlimit));
 		}
