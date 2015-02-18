@@ -33,21 +33,21 @@ public class Manager : MonoBehaviour {
 	}
 
 	void generate_pizza(){
-		float xlimit = mapInstance.size.x * 0.5f - 0.5f;
-		float zlimit = mapInstance.size.z * 0.5f - 0.5f;
+		int xlimit = mapInstance.size.x * 1;
+		int zlimit = mapInstance.size.z * 1;
 		pizzas = new Pizza[NumOfPizza];
 		for (int i = 0; i < NumOfPizza; i++) {
 			Pizza newpizza = Instantiate(PizzaPrefab) as Pizza;
 			pizzas[i] = newpizza;
 			newpizza.name = "pizza" + i;
 			newpizza.transform.localPosition =
-				new Vector3(Random.Range(-xlimit,xlimit), 0f, Random.Range(-zlimit,zlimit));
+				new Vector3(Random.Range(-xlimit,xlimit), 0, Random.Range(-zlimit,zlimit));
 		}
 	}
 	
 	void generate_boss(){
-		float xlimit = mapInstance.size.x * 0.5f - 0.5f;
-		float zlimit = mapInstance.size.z * 0.5f - 0.5f;
+		int xlimit = mapInstance.size.x * 1;
+		int zlimit = mapInstance.size.z * 1;
 
 		bosses = new Boss[NumOfBoss];
 		for (int i = 0; i < NumOfBoss; i++) {
@@ -55,7 +55,7 @@ public class Manager : MonoBehaviour {
 			bosses[i] = newboss;
 			newboss.name = "boss" + i;
 			newboss.transform.localPosition =
-				new Vector3(Random.Range(-xlimit,xlimit), 0f, Random.Range(-zlimit,zlimit));
+				new Vector3(Random.Range(-xlimit,xlimit), 0, Random.Range(-zlimit,zlimit));
 		}
 	}
 

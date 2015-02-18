@@ -59,7 +59,7 @@ public class Map : MonoBehaviour {
 		newCell.name = "Map Cell " + coordinates.x + ", " + coordinates.z;
 		newCell.transform.parent = transform;
 		newCell.transform.localPosition =
-			new Vector3(coordinates.x - size.x * 0.5f + 0.5f, -0.5f, coordinates.z - size.z * 0.5f + 0.5f);
+			new Vector3(coordinates.x * 2 - size.x, -0.5f, coordinates.z * 2 - size.z );
 		return newCell;
 	}
 	
@@ -80,14 +80,14 @@ public class Map : MonoBehaviour {
 		Wall wall = Instantiate(wallPrefab) as Wall;
 		wall.Initialize(cell, otherCell, direction);
 		wall.transform.localPosition +=
-			new Vector3(0, 0.5f, 0);
+			new Vector3(0, 1, 0);
 		
 		if (otherCell != null) {
 //			otherCell.GetEdge(direction.GetOpposite()).dest();
 			wall = Instantiate(wallPrefab) as Wall;
 			wall.Initialize(otherCell, cell, direction.GetOpposite());
 			wall.transform.localPosition +=
-				new Vector3(0, 0.5f, 0);
+				new Vector3(0, 1, 0);
 		}
 		
 	}
