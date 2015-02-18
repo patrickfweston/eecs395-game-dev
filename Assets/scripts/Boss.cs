@@ -8,6 +8,8 @@ public class Boss : MonoBehaviour {
 	Color calm = Color.yellow;
 //	gameObject.Collider.Material = null;
 
+	IBossBehavior behavior; 
+
 	void Angry(){
 		Color oldColor = gameObject.renderer.material.color;
 		gameObject.renderer.material.color = Color.Lerp(oldColor, angry, Time.deltaTime * smooth);
@@ -17,9 +19,18 @@ public class Boss : MonoBehaviour {
 		gameObject.renderer.material.color = calm;
 	}
 
+	void Start() {
+		behavior = new LineOfSightBossBehavior (GameObject.Find("Runner"));
+	}
+
+	void Update() {
+		behavior.Update(this);
+	}
+
 	void OnCollisionStay(Collision col){
 		if (col.gameObject.name == "Runner") {
 			Angry();
+			behavior.collideWithPlayer();
 		}
 	}
 
