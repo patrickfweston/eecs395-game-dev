@@ -15,4 +15,7 @@ public abstract class CellEdge : MonoBehaviour {
 		transform.localPosition = Vector3.zero;
 		transform.localRotation = direction.ToRotation();
 	}
+	public void dest(){
+		Destroy(gameObject);
+	}
 }
