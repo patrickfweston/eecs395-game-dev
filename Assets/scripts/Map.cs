@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Text;
+using System.IO;
+
 
 public class Map : MonoBehaviour {
 	
@@ -12,8 +15,6 @@ public class Map : MonoBehaviour {
 	public Wall wallPrefab;
 	
 	private MapCell[,] cells;
-	
-	public float generationStepDelay = 0;
 	
 	public MapCell GetCell (IntVector2 coordinates) {
 		return cells[coordinates.x, coordinates.z];
@@ -32,18 +33,16 @@ public class Map : MonoBehaviour {
 		
 	}
 	
-	public IEnumerator Generate_map () {
-		WaitForSeconds delay = new WaitForSeconds(0);
+	public void Generate_floor () {
 		cells = new MapCell[size.x, size.z];
 		for (int x = 0; x < size.x; x++) {
 			for (int z = 0; z < size.z; z++) {
-				yield return delay;
 				CreateCell(new IntVector2(x, z));
-				
+
 				MapCell currentCell = cells[x,z];
 				
 				foreach(CellDirection direction in Enum.GetValues(typeof(CellDirection))){
-					
+
 					MapCell neighbor = GetNeighbor(currentCell, direction);
 					if(neighbor != null) {
 						CreatePassage(currentCell, neighbor, direction);
@@ -51,29 +50,6 @@ public class Map : MonoBehaviour {
 				}
 			}
 		}
-		
-		IntVector2 Center1 = new IntVector2(3,3);
-		IntVector2 Center2 = new IntVector2(12,3);
-		IntVector2 Center3 = new IntVector2(21,3);
-		IntVector2 Center4 = new IntVector2(21,12);
-		IntVector2 Center5 = new IntVector2(12,12);
-		IntVector2 Center6 = new IntVector2(3,12);
-		IntVector2 Center7 = new IntVector2(3,21);
-
-		IntVector2 Center8 = new IntVector2(12,21);
-
-		IntVector2 Center9 = new IntVector2(21,21);
-		CreateRoom(Center1, 3);
-		CreateRoom(Center2, 3);
-		CreateRoom(Center3, 3);
-		CreateRoom(Center4, 3);
-		CreateRoom(Center5, 3);
-		CreateRoom(Center6, 3);
-		CreateRoom(Center7, 3);
-		CreateRoom(Center8, 3);
-		CreateRoom(Center9, 3);
-
-
 	}
 	
 	private MapCell CreateCell (IntVector2 coordinates) {
@@ -115,86 +91,134 @@ public class Map : MonoBehaviour {
 		}
 		
 	}
+
+	private void CreateEdge(MapCell cell, CellDirection direction, string wall){
+		MapCell neighbor = GetNeighbor(cell, direction);
+		if(wall != "0") CreateWall(cell, neighbor, direction);
+	}
 	
 	private void CreateRoom(IntVector2 center, int radius){
-		int edge_cell_num = radius*2+1;
-		bool door = false;
-		Debug.Log("---------");
-		while(!door){
-			Debug.Log("====");
-			CreateRoom_(center, radius, ref door, edge_cell_num);
-		}
+//		int edge_cell_num = radius*2+1;
+//		bool door = false;
+//		//Debug.Log("---------");
+//		while(!door){
+//			//Debug.Log("====");
+//			CreateRoom_(center, radius, ref door, edge_cell_num);
+//		}
 
 	}
 	
-	private void CreateRoom_(IntVector2 center, int radius,ref bool door, int edge_cell_num){
-		
-		int door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
-		Debug.Log(door_pos);
-		
-		IntVector2 coord = center + (CellDirection.North.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
-		
-		if(CoordMakeSense(coord)){
-			MapCell NWCell = GetCell(coord);
-			CreateRoomEdge(NWCell, CellDirection.North, edge_cell_num,ref door_pos, ref door);
-		}
-		
-		coord = center +  (CellDirection.North.ToIntVector2() + CellDirection.East.ToIntVector2()) * radius;
-		if(CoordMakeSense(coord)){
-			MapCell NECell = GetCell(coord);
-			CreateRoomEdge(NECell, CellDirection.East, edge_cell_num,ref door_pos, ref door);
-		}
+//	private void CreateRoom_(IntVector2 center, int radius,ref bool door, int edge_cell_num){
+//		
+//		int door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
+//		//Debug.Log(door_pos);
+//		
+//		IntVector2 coord = center + (CellDirection.North.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
+//		
+//		if(CoordMakeSense(coord)){
+//			MapCell NWCell = GetCell(coord);
+//			CreateRoomEdge(NWCell, CellDirection.North, edge_cell_num,ref door_pos, ref door);
+//		}
+//		
+//		coord = center +  (CellDirection.North.ToIntVector2() + CellDirection.East.ToIntVector2()) * radius;
+//		if(CoordMakeSense(coord)){
+//			MapCell NECell = GetCell(coord);
+//			CreateRoomEdge(NECell, CellDirection.East, edge_cell_num,ref door_pos, ref door);
+//		}
+//
+//		coord = center +  (CellDirection.East.ToIntVector2() + CellDirection.South.ToIntVector2()) * radius;
+//		if(CoordMakeSense(coord)){
+//			MapCell ESCell = GetCell(coord);
+//			CreateRoomEdge(ESCell, CellDirection.South, edge_cell_num,ref door_pos, ref door);
+//		}
+//		
+//		coord = center +  (CellDirection.South.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
+//		
+//		if(CoordMakeSense(coord)){
+//			MapCell SWCell = GetCell(coord);
+//			CreateRoomEdge(SWCell, CellDirection.West, edge_cell_num,ref door_pos, ref door);
+//		}
+//
+//	}
+//	
+//	private void CreateRoomEdge(MapCell startCell, CellDirection direction, int repitition, ref int door_pos, ref bool door){
+//
+//		IntVector2[] vectors = {
+//			new IntVector2(1, 0),
+//			new IntVector2(0, -1),
+//			new IntVector2(-1, 0),
+//			new IntVector2(0, 1)
+//		};
+//		
+//		
+//		for(int i = 0; i< repitition; i++,door_pos--){
+//			//Debug.Log(i);
+//			MapCell neighbor = GetNeighbor(startCell, direction);
+//			IntVector2 next = startCell.coordinates + vectors[(int)direction];
+//			if(door_pos == 0) {
+//				if(neighbor == null){
+//					door_pos++;
+//				}
+//				else {
+//					//Debug.Log ("!");
+//					
+//					startCell.GetEdge(direction).dest();
+//					neighbor.GetEdge(direction.GetOpposite()).dest();
+//					CreatePassage(startCell, neighbor, direction);
+//					if(CoordMakeSense(next)) startCell = GetCell(next);
+//					door = true;
+//					continue;
+//				}
+//				
+//			}
+//			
+//			CreateWall (startCell, neighbor, direction);
+//			
+//			if(CoordMakeSense(next)) startCell = GetCell(next);
+//			
+//		}
+//	}
 
-		coord = center +  (CellDirection.East.ToIntVector2() + CellDirection.South.ToIntVector2()) * radius;
-		if(CoordMakeSense(coord)){
-			MapCell ESCell = GetCell(coord);
-			CreateRoomEdge(ESCell, CellDirection.South, edge_cell_num,ref door_pos, ref door);
-		}
-		
-		coord = center +  (CellDirection.South.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
-		
-		if(CoordMakeSense(coord)){
-			MapCell SWCell = GetCell(coord);
-			CreateRoomEdge(SWCell, CellDirection.West, edge_cell_num,ref door_pos, ref door);
-		}
-
-	}
-	
-	private void CreateRoomEdge(MapCell startCell, CellDirection direction, int repitition, ref int door_pos, ref bool door){
-
-		IntVector2[] vectors = {
-			new IntVector2(1, 0),
-			new IntVector2(0, -1),
-			new IntVector2(-1, 0),
-			new IntVector2(0, 1)
-		};
-		
-		
-		for(int i = 0; i< repitition; i++,door_pos--){
-			Debug.Log(i);
-			MapCell neighbor = GetNeighbor(startCell, direction);
-			IntVector2 next = startCell.coordinates + vectors[(int)direction];
-			if(door_pos == 0) {
-				if(neighbor == null){
-					door_pos++;
+	public bool load_map_from_file(string fileName){
+		try{
+			StreamReader theReader = new StreamReader(fileName, Encoding.Default);
+			using (theReader){
+				string line = null;
+				do{
+					line = theReader.ReadLine();
+					Debug.Log(line);
+					if(line.StartsWith("//")) continue;
+					string[] entries = line.Split(' ');
+					if(entries.Length > 0) Create_map(entries);
 				}
-				else {
-					Debug.Log ("!");
-					
-					startCell.GetEdge(direction).dest();
-					neighbor.GetEdge(direction.GetOpposite()).dest();
-					CreatePassage(startCell, neighbor, direction);
-					if(CoordMakeSense(next)) startCell = GetCell(next);
-					door = true;
-					continue;
-				}
-				
+				while(line != null);
+				theReader.Close();
+				return true;
 			}
-			
-			CreateWall (startCell, neighbor, direction);
-			
-			if(CoordMakeSense(next)) startCell = GetCell(next);
-			
+		}
+		catch(Exception){
+			Debug.Log("wrong reading file");
+			return false;
+		}
+	}
+
+	private void Create_map(string[] entries){
+		if(entries[0] == "#") {
+			Int32.TryParse(entries[1], out size.x);
+			Int32.TryParse(entries[2], out size.z);
+			Generate_floor();
+			return;
+		}
+
+		else {
+			IntVector2 coord = new IntVector2(-1,-1);
+			Int32.TryParse(entries[0], out coord.x);
+			Int32.TryParse(entries[1], out coord.z);
+
+			CellDirection[] dirs = {CellDirection.West, CellDirection.North, CellDirection.East,CellDirection.South};
+			for(int i = 0; i < 4;i++){
+				CreateEdge(GetCell(coord),dirs[i],entries[i+2]);
+			}
 		}
 	}
 	

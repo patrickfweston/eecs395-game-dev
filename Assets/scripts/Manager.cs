@@ -17,7 +17,7 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine(BeginGame());
+		BeginGame();
 	}
 	
 	// Update is called once per frame
@@ -25,9 +25,9 @@ public class Manager : MonoBehaviour {
 		
 	}
 
-	private IEnumerator BeginGame () {
+	private void BeginGame () {
 		mapInstance = Instantiate(mapPrefab) as Map;
-		yield return StartCoroutine(mapInstance.Generate_map());
+		mapInstance.load_map_from_file("Assets/map_data");
 		generate_pizza ();
 		generate_boss();
 	}
@@ -58,6 +58,8 @@ public class Manager : MonoBehaviour {
 				new Vector3(Random.Range(-xlimit,xlimit), 0f, Random.Range(-zlimit,zlimit));
 		}
 	}
+
+
 	
 	
 }
