@@ -6,7 +6,7 @@ public class GUIManager : MonoBehaviour {
 	
 	private static GUIManager instance;
 	public Canvas bS, bC;
-	public GUIText foodCount; 
+	public GUIText foodCount, karmaCount; 
 
 	private static Canvas bribeScreen, bribeCountdown;
 
@@ -34,6 +34,10 @@ public class GUIManager : MonoBehaviour {
 		instance.foodCount.text = count.ToString();
 	}
 
+	public static void updateKarmaCount(int karma) {
+		instance.karmaCount.text = karma.ToString ();
+	}
+
 	public static void showBribeScreen() {
 		BribeScreen.initBribeScreen ();
 		bribeScreen.enabled = true;
@@ -44,8 +48,8 @@ public class GUIManager : MonoBehaviour {
 		bribeScreen.gameObject.SetActive(false);
 	}
 
-	public static void showBribeCountdown() {
-		BribeCountdown.initBribeCountdown();
+	public static void showBribeCountdown(int bribe) {
+		BribeCountdown.initBribeCountdown(bribe);
 		bribeCountdown.enabled = true;
 		bribeCountdown.gameObject.SetActive(true);
 	}

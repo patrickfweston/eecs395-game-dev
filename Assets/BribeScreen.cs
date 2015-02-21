@@ -60,6 +60,6 @@ public class BribeScreen : MonoBehaviour {
 	public void submitBribe() {
 		Runner.decrementPizzaBy (bribe);
 		GUIManager.hideBribeScreen ();
-		GUIManager.showBribeCountdown ();
+		GUIManager.showBribeCountdown (bribe);
 	}
 }

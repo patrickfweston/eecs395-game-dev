@@ -3,6 +3,7 @@
 public class Runner : MonoBehaviour {
 
 	private static int numFood;
+	private static int karma;
 	private static Runner instance;
 	private static bool enabled;
 
@@ -57,6 +58,16 @@ public class Runner : MonoBehaviour {
 	public static void decrementPizzaBy(int count) {
 		numFood -= count;
 		GUIManager.updatePizzaCount(numFood);
+	}
+
+	public static void incrementKarmaBy(int count) {
+		karma += count;
+		GUIManager.updateKarmaCount(karma);
+	}
+	
+	public static void decrementKarmaBy(int count) {
+		karma -= count;
+		GUIManager.updateKarmaCount(karma);
 	}
 
 	public static int getFoodCount() {
