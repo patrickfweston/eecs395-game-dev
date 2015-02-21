@@ -45,7 +45,7 @@ public class BribeCountdown : MonoBehaviour {
 	}
 
 	public void calculateValues(int bribe) {
-		startingKarma = (int) ((float) bribe * 1.5);
+		startingKarma = (int) ((float) bribe * 1.5) + 1;
 		timeRemaining = bribe * 3;
 		startingTime = timeRemaining;
 	}
