@@ -18,7 +18,7 @@ public class BribeScreen : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyUp ("return")) {
-
+			submitBribe();
 		}
 		if (Input.GetKeyUp ("up")) {
 			incrementBribeAmount(1);
@@ -55,5 +55,11 @@ public class BribeScreen : MonoBehaviour {
 	public void displayBribeAmount(int x) {
 		Text text = BribeAmount.GetComponent<Text> ();
 		text.text = x.ToString ();
+	}
+
+	public void submitBribe() {
+		Runner.decrementPizzaBy (bribe);
+		Runner.isEnabled (true);
+		GUIManager.hideBribeScreen ();
 	}
 }

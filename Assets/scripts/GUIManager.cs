@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GUIManager : MonoBehaviour {
@@ -35,6 +36,9 @@ public class GUIManager : MonoBehaviour {
 	public static void showBribeScreen() {
 		BribeScreen.initBribeScreen ();
 		bribeScreen.enabled = true;
-		Debug.Log("GUIManager");
+	}
+
+	public static void hideBribeScreen() {
+		bribeScreen.gameObject.SetActive(false);
 	}
 }
