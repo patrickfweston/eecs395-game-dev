@@ -14,8 +14,9 @@ public class GUIManager : MonoBehaviour {
 	void Start () {
 		instance = this;
 
-		bribeScreen.enabled = true;
-		bribeCountdown.enabled = false;
+		bribeScreen.gameObject.SetActive (true);
+		bribeCountdown.gameObject.SetActive (false);
+		updatePizzaCount (Runner.getFoodCount());
 	}
 	
 	// Update is called once per frame
@@ -36,9 +37,20 @@ public class GUIManager : MonoBehaviour {
 	public static void showBribeScreen() {
 		BribeScreen.initBribeScreen ();
 		bribeScreen.enabled = true;
+		bribeScreen.gameObject.SetActive (true);
 	}
 
 	public static void hideBribeScreen() {
 		bribeScreen.gameObject.SetActive(false);
+	}
+
+	public static void showBribeCountdown() {
+		BribeCountdown.initBribeCountdown();
+		bribeCountdown.enabled = true;
+		bribeCountdown.gameObject.SetActive(true);
+	}
+
+	public static void hideBribeCountdown() {
+		bribeCountdown.gameObject.SetActive (false);
 	}
 }

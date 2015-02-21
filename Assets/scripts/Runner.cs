@@ -4,16 +4,16 @@ public class Runner : MonoBehaviour {
 
 	private static int numFood;
 	private static Runner instance;
-	private static bool paused;
+	private static bool enabled;
 
 	void Start() {
 		instance = this;
 		numFood = 10;
-		paused = false;
+		enabled = false;
 	}
 
 	void Update () {
-		if (paused) {
+		if (enabled) {
 			move_character ();
 		}
 	}
@@ -64,7 +64,7 @@ public class Runner : MonoBehaviour {
 	}
 
 	public static void isEnabled(bool x) {
-		paused = x;
+		enabled = x;
 		Debug.Log ("disabled");
 	}
 }

@@ -7,7 +7,7 @@ public class BribeScreen : MonoBehaviour {
 	private static BribeScreen instance;
 	public GameObject BribeAmount;
 
-	private int bribe;
+	private static int bribe;
 
 	// Use this for initialization
 	void Start () {
@@ -30,12 +30,12 @@ public class BribeScreen : MonoBehaviour {
 
 	void Awake () {
 		instance = this;
-		Runner.isEnabled (false);
-		bribe = 0;
 	}
 
 	public static void initBribeScreen() {
 		instance.enabled = true;
+		Runner.isEnabled (false);
+		bribe = 0;
 	}
 
 	public void incrementBribeAmount(int x) {
@@ -59,7 +59,7 @@ public class BribeScreen : MonoBehaviour {
 
 	public void submitBribe() {
 		Runner.decrementPizzaBy (bribe);
-		Runner.isEnabled (true);
 		GUIManager.hideBribeScreen ();
+		GUIManager.showBribeCountdown ();
 	}
 }
