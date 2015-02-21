@@ -3,15 +3,20 @@
 public class Runner : MonoBehaviour {
 
 	private static int numFood;
+	private static int karma;
 	private static Runner instance;
+	private static bool enabled;
 
 	void Start() {
 		instance = this;
-		numFood = 0;
+		numFood = 10;
+		enabled = false;
 	}
 
 	void Update () {
-		move_character();
+		if (enabled) {
+			move_character ();
+		}
 	}
 
 	void move_character() {
@@ -53,5 +58,24 @@ public class Runner : MonoBehaviour {
 	public static void decrementPizzaBy(int count) {
 		numFood -= count;
 		GUIManager.updatePizzaCount(numFood);
+	}
+
+	public static void incrementKarmaBy(int count) {
+		karma += count;
+		GUIManager.updateKarmaCount(karma);
+	}
+	
+	public static void decrementKarmaBy(int count) {
+		karma -= count;
+		GUIManager.updateKarmaCount(karma);
+	}
+
+	public static int getFoodCount() {
+		return numFood;
+	}
+
+	public static void isEnabled(bool x) {
+		enabled = x;
+		Debug.Log ("disabled");
 	}
 }

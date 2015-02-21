@@ -186,7 +186,7 @@ public class Map : MonoBehaviour {
 				string line = null;
 				do{
 					line = theReader.ReadLine();
-					Debug.Log(line);
+					//Debug.Log(line);
 					if(line.StartsWith("//")) continue;
 					string[] entries = line.Split(' ');
 					if(entries.Length > 0) Create_map(entries);
