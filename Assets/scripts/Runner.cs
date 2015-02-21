@@ -4,14 +4,18 @@ public class Runner : MonoBehaviour {
 
 	private static int numFood;
 	private static Runner instance;
+	private static bool paused;
 
 	void Start() {
 		instance = this;
-		numFood = 0;
+		numFood = 10;
+		paused = false;
 	}
 
 	void Update () {
-		move_character();
+		if (paused) {
+			move_character ();
+		}
 	}
 
 	void move_character() {
@@ -53,5 +57,14 @@ public class Runner : MonoBehaviour {
 	public static void decrementPizzaBy(int count) {
 		numFood -= count;
 		GUIManager.updatePizzaCount(numFood);
+	}
+
+	public static int getFoodCount() {
+		return numFood;
+	}
+
+	public static void isEnabled(bool x) {
+		paused = x;
+		Debug.Log ("disabled");
 	}
 }
