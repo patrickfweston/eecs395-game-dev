@@ -76,6 +76,6 @@ public class Runner : MonoBehaviour {
 
 	public static void isEnabled(bool x) {
 		enabled = x;
-		Debug.Log ("disabled");
+//		Debug.Log ("disabled");
 	}
 }

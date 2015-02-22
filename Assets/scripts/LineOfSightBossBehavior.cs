@@ -15,7 +15,7 @@ public class LineOfSightBossBehavior : IBossBehavior {
 
 	// delegate function for boss to call to handle collision
 	void IBossBehavior.collideWithPlayer() {
-		Debug.Log("Collide with player");
+//		Debug.Log("Collide with player");
 	}
 	
 	// called during fixed update in boss

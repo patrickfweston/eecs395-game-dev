@@ -13,6 +13,7 @@ public class Map : MonoBehaviour {
 	public MapCell cellPrefab;
 	public Passage passagePrefab;
 	public Wall wallPrefab;
+	public Door doorPrefab;
 	
 	private MapCell[,] cells;
 	
@@ -92,92 +93,27 @@ public class Map : MonoBehaviour {
 		
 	}
 
+	private void CreateDoor (MapCell cell, MapCell otherCell, CellDirection direction) {
+		if(cell == null) return;
+		Door door = Instantiate(doorPrefab) as Door;
+		door.Initialize(cell, otherCell, direction);
+		door.transform.localPosition +=
+			new Vector3(0, 1, 0);
+		
+		if (otherCell != null) {
+			door = Instantiate(doorPrefab) as Door;
+			door.Initialize(otherCell, cell, direction.GetOpposite());
+			door.transform.localPosition +=
+				new Vector3(0, 1, 0);
+		}
+	}
+
 	private void CreateEdge(MapCell cell, CellDirection direction, string wall){
 		MapCell neighbor = GetNeighbor(cell, direction);
-		if(wall != "0") CreateWall(cell, neighbor, direction);
+		if(wall == "1") CreateWall(cell, neighbor, direction);
+		if(wall == "2") CreateDoor(cell, neighbor, direction);
 	}
-	
-	private void CreateRoom(IntVector2 center, int radius){
-//		int edge_cell_num = radius*2+1;
-//		bool door = false;
-//		//Debug.Log("---------");
-//		while(!door){
-//			//Debug.Log("====");
-//			CreateRoom_(center, radius, ref door, edge_cell_num);
-//		}
 
-	}
-	
-//	private void CreateRoom_(IntVector2 center, int radius,ref bool door, int edge_cell_num){
-//		
-//		int door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
-//		//Debug.Log(door_pos);
-//		
-//		IntVector2 coord = center + (CellDirection.North.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
-//		
-//		if(CoordMakeSense(coord)){
-//			MapCell NWCell = GetCell(coord);
-//			CreateRoomEdge(NWCell, CellDirection.North, edge_cell_num,ref door_pos, ref door);
-//		}
-//		
-//		coord = center +  (CellDirection.North.ToIntVector2() + CellDirection.East.ToIntVector2()) * radius;
-//		if(CoordMakeSense(coord)){
-//			MapCell NECell = GetCell(coord);
-//			CreateRoomEdge(NECell, CellDirection.East, edge_cell_num,ref door_pos, ref door);
-//		}
-//
-//		coord = center +  (CellDirection.East.ToIntVector2() + CellDirection.South.ToIntVector2()) * radius;
-//		if(CoordMakeSense(coord)){
-//			MapCell ESCell = GetCell(coord);
-//			CreateRoomEdge(ESCell, CellDirection.South, edge_cell_num,ref door_pos, ref door);
-//		}
-//		
-//		coord = center +  (CellDirection.South.ToIntVector2() + CellDirection.West.ToIntVector2()) * radius;
-//		
-//		if(CoordMakeSense(coord)){
-//			MapCell SWCell = GetCell(coord);
-//			CreateRoomEdge(SWCell, CellDirection.West, edge_cell_num,ref door_pos, ref door);
-//		}
-//
-//	}
-//	
-//	private void CreateRoomEdge(MapCell startCell, CellDirection direction, int repitition, ref int door_pos, ref bool door){
-//
-//		IntVector2[] vectors = {
-//			new IntVector2(1, 0),
-//			new IntVector2(0, -1),
-//			new IntVector2(-1, 0),
-//			new IntVector2(0, 1)
-//		};
-//		
-//		
-//		for(int i = 0; i< repitition; i++,door_pos--){
-//			//Debug.Log(i);
-//			MapCell neighbor = GetNeighbor(startCell, direction);
-//			IntVector2 next = startCell.coordinates + vectors[(int)direction];
-//			if(door_pos == 0) {
-//				if(neighbor == null){
-//					door_pos++;
-//				}
-//				else {
-//					//Debug.Log ("!");
-//					
-//					startCell.GetEdge(direction).dest();
-//					neighbor.GetEdge(direction.GetOpposite()).dest();
-//					CreatePassage(startCell, neighbor, direction);
-//					if(CoordMakeSense(next)) startCell = GetCell(next);
-//					door = true;
-//					continue;
-//				}
-//				
-//			}
-//			
-//			CreateWall (startCell, neighbor, direction);
-//			
-//			if(CoordMakeSense(next)) startCell = GetCell(next);
-//			
-//		}
-//	}
 
 	public bool load_map_from_file(string fileName){
 		try{
