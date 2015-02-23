@@ -10,7 +10,7 @@ public class Runner : MonoBehaviour {
 	void Start() {
 		instance = this;
 		numFood = 10;
-		enabled = false;
+		enabled = true;
 	}
 
 	void Update () {

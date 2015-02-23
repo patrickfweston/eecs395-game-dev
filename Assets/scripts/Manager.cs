@@ -18,7 +18,6 @@ public class Manager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		BeginGame();
-		GUIManager.showBribeScreen ();
 	}
 	
 	// Update is called once per frame
