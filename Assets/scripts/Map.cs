@@ -99,13 +99,6 @@ public class Map : MonoBehaviour {
 		door.Initialize(cell, otherCell, direction);
 		door.transform.localPosition +=
 			new Vector3(0, 1, 0);
-		
-		if (otherCell != null) {
-			door = Instantiate(doorPrefab) as Door;
-			door.Initialize(otherCell, cell, direction.GetOpposite());
-			door.transform.localPosition +=
-				new Vector3(0, 1, 0);
-		}
 	}
 
 	private void CreateEdge(MapCell cell, CellDirection direction, string wall){

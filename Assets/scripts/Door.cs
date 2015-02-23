@@ -10,7 +10,6 @@ public class Door: CellEdge {
 	}
 	
 	void OnCollisionExit(Collision col){
-		//		Debug.Log ("calm");
 		if (col.gameObject.name == "Runner") {
 			Debug.Log("Leave room!");
 		}
