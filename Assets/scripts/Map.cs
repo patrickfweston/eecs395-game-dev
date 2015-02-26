@@ -13,8 +13,9 @@ public class Map : MonoBehaviour {
 	public MapCell cellPrefab;
 	public Passage passagePrefab;
 	public Wall wallPrefab;
-	public Door doorPrefab;
-	
+	public Desk deskPrefab;
+	public Material roomfloormat;
+
 	private MapCell[,] cells;
 	
 	public MapCell GetCell (IntVector2 coordinates) {
@@ -93,32 +94,41 @@ public class Map : MonoBehaviour {
 		
 	}
 
-	private void CreateDoor (MapCell cell, MapCell otherCell, CellDirection direction) {
+	private void CreateDesk (MapCell cell, MapCell otherCell, CellDirection direction) {
 		if(cell == null) return;
-		Door door = Instantiate(doorPrefab) as Door;
-		door.Initialize(cell, otherCell, direction);
-		door.transform.localPosition +=
-			new Vector3(0, 1, 0);
+		Desk desk = Instantiate(deskPrefab) as Desk;
+//		desk.Initialize(cell, otherCell, direction);
+		desk.transform.localPosition =
+			cell.transform.localPosition+ new Vector3(0, 1,0);
 	}
 
-	private void CreateEdge(MapCell cell, CellDirection direction, string wall){
+	private void CreateEdge(MapCell cell, CellDirection direction, string wall, bool room){
 		MapCell neighbor = GetNeighbor(cell, direction);
 		if(wall == "1") CreateWall(cell, neighbor, direction);
-		if(wall == "2") CreateDoor(cell, neighbor, direction);
+		if(wall == "2") CreateDesk(cell, neighbor, direction);
+		if(room){
+			cell.transform.GetChild(0).GetComponent<Renderer>().material = roomfloormat;
+		}
 	}
 
 
 	public bool load_map_from_file(string fileName){
 		try{
 			StreamReader theReader = new StreamReader(fileName, Encoding.Default);
+			bool room = false;
 			using (theReader){
 				string line = null;
 				do{
 					line = theReader.ReadLine();
-					//Debug.Log(line);
-					if(line.StartsWith("//")) continue;
+//					Debug.Log(line);
+					if(line.StartsWith("//")) {
+						if(line.EndsWith("rooms")){
+							room = true;
+						}
+						continue;
+					}
 					string[] entries = line.Split(' ');
-					if(entries.Length > 0) Create_map(entries);
+					if(entries.Length > 0) Create_map(entries, room);
 				}
 				while(line != null);
 				theReader.Close();
@@ -130,13 +140,13 @@ public class Map : MonoBehaviour {
 			return false;
 
 		// From: boss-ai branch
-		//		if(!door){
-		//			door_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
+		//		if(!desk){
+		//			desk_pos = UnityEngine.Random.Range(0, edge_cell_num * 4 - 4 - 1);
 		//			CreateRooms(center, radius);
 		}
 	}
 
-	private void Create_map(string[] entries){
+	private void Create_map(string[] entries, bool room){
 		if(entries[0] == "#") {
 			Int32.TryParse(entries[1], out size.x);
 			Int32.TryParse(entries[2], out size.z);
@@ -151,7 +161,7 @@ public class Map : MonoBehaviour {
 
 			CellDirection[] dirs = {CellDirection.West, CellDirection.North, CellDirection.East,CellDirection.South};
 			for(int i = 0; i < 4;i++){
-				CreateEdge(GetCell(coord),dirs[i],entries[i+2]);
+				CreateEdge(GetCell(coord),dirs[i],entries[i+2], room);
 			}
 		}
 	}
