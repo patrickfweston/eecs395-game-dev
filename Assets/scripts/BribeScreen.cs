@@ -5,7 +5,7 @@ using System.Collections;
 public class BribeScreen : MonoBehaviour {
 
 	private static BribeScreen instance;
-	public GameObject BribeAmount;
+	public GameObject BribeAmount, KarmaAmount, TimeAmount;
 
 	private static int bribe;
 
@@ -36,6 +36,7 @@ public class BribeScreen : MonoBehaviour {
 		instance.enabled = true;
 		Runner.isEnabled (false);
 		bribe = 0;
+		instance.displayBribeAmount (bribe);
 	}
 
 	public void incrementBribeAmount(int x) {
@@ -53,13 +54,21 @@ public class BribeScreen : MonoBehaviour {
 	}
 
 	public void displayBribeAmount(int x) {
-		Text text = BribeAmount.GetComponent<Text> ();
-		text.text = x.ToString ();
+		Text bAmount = BribeAmount.GetComponent<Text> ();
+		bAmount.text = x.ToString ();
+
+		Text kAmount = KarmaAmount.GetComponent<Text> ();
+		kAmount.text = BribeCountdown.getKarmaAmount (x).ToString();
+
+		Text tAmount = TimeAmount.GetComponent<Text> ();
+		tAmount.text = BribeCountdown.updateTime (BribeCountdown.getTime (x));
 	}
 
 	public void submitBribe() {
-		Runner.decrementPizzaBy (bribe);
-		GUIManager.hideBribeScreen ();
-		GUIManager.showBribeCountdown (bribe);
+		if (bribe > 0) {
+			Runner.decrementPizzaBy (bribe);
+			GUIManager.hideBribeScreen ();
+			GUIManager.showBribeCountdown (bribe);
+		}
 	}
 }
