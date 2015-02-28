@@ -3,6 +3,7 @@
 public class MapCell : MonoBehaviour {
 
 	public IntVector2 coordinates;
+	public bool hasdesk = false;
 
 	private CellEdge[] edges = new CellEdge[CellDirections.Count];
 	

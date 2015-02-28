@@ -33,31 +33,47 @@ public class Manager : MonoBehaviour {
 
 	}
 
+
 	void generate_pizza(){
-		int xlimit = mapInstance.size.x /2;
-		int zlimit = mapInstance.size.z /2;
+
 		pizzas = new Pizza[NumOfPizza];
 		for (int i = 0; i < NumOfPizza; i++) {
 			Pizza newpizza = Instantiate(PizzaPrefab) as Pizza;
 			pizzas[i] = newpizza;
 			newpizza.name = "pizza" + i;
-			newpizza.transform.localPosition =
-				new Vector3(Random.Range(-xlimit,xlimit)*2+1, 0, Random.Range(-zlimit,zlimit)*2+1);
+			int indexx = Random.Range(0, mapInstance.size.x-1);
+			int indexz = Random.Range(0, mapInstance.size.z-1);
+			MapCell tmp = mapInstance.GetCell(new IntVector2(indexx,indexz));
+
+			while(tmp.hasdesk){
+				indexx = Random.Range(0, mapInstance.size.x-1);
+				indexz = Random.Range(0, mapInstance.size.z-1);
+				tmp = mapInstance.GetCell(new IntVector2(indexx,indexz));
+				Debug.Log("!!");
+			}
+
+			newpizza.transform.localPosition = tmp.transform.localPosition;
 		}
 	}
 	
 	void generate_boss(){
-		int xlimit = mapInstance.size.x /2;
-		int zlimit = mapInstance.size.z /2;
-
 		bosses = new Boss[NumOfBoss];
 		for (int i = 0; i < NumOfBoss; i++) {
 			Boss newboss = Instantiate(BossPrefab) as Boss;
 			bosses[i] = newboss;
 			newboss.name = "boss" + i;
-
-			newboss.transform.localPosition =
-				new Vector3(Random.Range(-xlimit,xlimit)*2+1, 0, Random.Range(-zlimit,zlimit)*2+1);
+			int indexx = Random.Range(0, mapInstance.size.x-1);
+			int indexz = Random.Range(0, mapInstance.size.z-1);
+			MapCell tmp = mapInstance.GetCell(new IntVector2(indexx,indexz));
+			
+			while(tmp.hasdesk){
+				indexx = Random.Range(0, mapInstance.size.x-1);
+				indexz = Random.Range(0, mapInstance.size.z-1);
+				tmp = mapInstance.GetCell(new IntVector2(indexx,indexz));
+				Debug.Log("!!");
+			}
+			
+			newboss.transform.localPosition = tmp.transform.localPosition;
 		}
 	}
 

@@ -100,6 +100,7 @@ public class Map : MonoBehaviour {
 //		desk.Initialize(cell, otherCell, direction);
 		desk.transform.localPosition =
 			cell.transform.localPosition+ new Vector3(0, 1,0);
+		cell.hasdesk = true;
 	}
 
 	private void CreateEdge(MapCell cell, CellDirection direction, string wall, bool room){
