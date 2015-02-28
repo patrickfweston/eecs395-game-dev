@@ -14,7 +14,8 @@ public class GUIManager : MonoBehaviour {
 	void Start () {
 		instance = this;
 
-		bribeScreen.gameObject.SetActive (false);
+		bribeScreen.gameObject.SetActive (true);
+		showBribeScreen ();
 		bribeCountdown.gameObject.SetActive (false);
 		updatePizzaCount (Runner.getFoodCount());
 	}

@@ -24,7 +24,7 @@ public class BribeCountdown : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyUp ("escape")) {
+		if (Input.GetKeyUp ("return")) {
 			endBribe();
 		}
 
@@ -32,8 +32,12 @@ public class BribeCountdown : MonoBehaviour {
 		if (timeRemaining < 0) {
 			endBribe ();
 		}
-		updateTime (timeRemaining);
-		updateKarma (startingKarma);
+
+		Text timeText = TimeCount.GetComponent<Text> ();
+		timeText.text = updateTime(timeRemaining);
+
+		Text karma = KarmaCount.GetComponent<Text> ();
+		karma.text = updateKarma (startingKarma);
 
 		RectTransform prog = ProgressBar.GetComponent<RectTransform> ();
 		prog.localScale = new Vector3 (timeRemaining / startingTime, 1, 1);
@@ -45,29 +49,34 @@ public class BribeCountdown : MonoBehaviour {
 	}
 
 	public void calculateValues(int bribe) {
-		startingKarma = (int) ((float) bribe * 1.5) + 1;
-		timeRemaining = bribe * 3;
+		startingKarma = getKarmaAmount(bribe);
+		timeRemaining = getTime (bribe);
 		startingTime = timeRemaining;
 	}
 
-	public void updateTime(float seconds) {
-		Text timeText = TimeCount.GetComponent<Text> ();
+	public static int getKarmaAmount(int bribe) {
+		return (int)Mathf.Round((float)bribe * 1.5f);
+	}
+
+	public static int getTime(int bribe) {
+		return bribe * 3;
+	}
+	
+	public static string updateTime(float seconds) {
 		int timeMinutes = (int) seconds / 60;
-		int timeSeconds = (int) seconds % 60 + 1;
+		int timeSeconds = (int) seconds % 60;
 
 		string padding = "";
 		if (timeSeconds < 10) {
 			padding = "0";
 		}
 
-		timeText.text = timeMinutes.ToString() + ":" + padding + timeSeconds.ToString();
+		return timeMinutes.ToString() + ":" + padding + timeSeconds.ToString();
 	}
 
-	public void updateKarma(int start) {
-		Text karma = KarmaCount.GetComponent<Text> ();
-		karma.text = karmaRemaining.ToString();
-
-		karmaRemaining = (int) ((float) startingKarma * (timeRemaining / startingTime));
+	public string updateKarma(int start) {
+		karmaRemaining = (int) Mathf.Round((float) start * (timeRemaining / startingTime));
+		return karmaRemaining.ToString ();
 	}
 
 	private void endBribe() {
