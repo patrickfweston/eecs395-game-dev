@@ -7,6 +7,7 @@ public class Runner : MonoBehaviour {
 	private static Runner instance;
 	private static bool enabled;
 
+
 	void Start() {
 		instance = this;
 		numFood = 10;

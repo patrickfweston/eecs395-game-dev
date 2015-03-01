@@ -32,13 +32,19 @@ public class Boss : MonoBehaviour {
 			Angry();
 			behavior.collideWithPlayer();
 			GUIManager.showBribeScreen();
+
+			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
+			mylight.color = Color.Lerp(mylight.color, Color.red, Time.deltaTime);
+//			GameObject.Find("")/
 		}
 	}
 
 	void OnCollisionExit(Collision col){
 //		Debug.Log ("calm");
-		if (col.gameObject.name == "Runner") {
+		if (col.gameObject.name == "Runner") {	
 			Calm();
+			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
+			mylight.color = Color.Lerp(mylight.color, Color.white, Time.deltaTime);
 		}
 	}
 
