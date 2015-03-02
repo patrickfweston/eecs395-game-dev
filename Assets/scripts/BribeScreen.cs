@@ -26,6 +26,10 @@ public class BribeScreen : MonoBehaviour {
 		if (Input.GetKeyUp ("down")) {
 			decrementBribeAmount(1);
 		}
+		if (Input.GetKeyUp ("escape")) {
+			GUIManager.hideBribeScreen ();
+			Runner.isEnabled(true);
+		}
 	}
 
 	void Awake () {

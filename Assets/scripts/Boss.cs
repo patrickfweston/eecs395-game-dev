@@ -31,7 +31,7 @@ public class Boss : MonoBehaviour {
 		if (col.gameObject.name == "Runner") {
 			Angry();
 			behavior.collideWithPlayer();
-			GUIManager.showBribeScreen();
+//			GUIManager.showBribeScreen();
 
 			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
 			mylight.color = Color.Lerp(mylight.color, Color.red, Time.deltaTime);
