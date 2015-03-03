@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Boss : MonoBehaviour {
 
+	public Light l;
 	private float smooth = 5;
 	Color angry = Color.red;
 	Color calm = Color.yellow;
-//	gameObject.Collider.Material = null;
 
 	IBossBehavior behavior; 
 
@@ -21,6 +21,7 @@ public class Boss : MonoBehaviour {
 
 	void Start() {
 		behavior = new LineOfSightBossBehavior (GameObject.Find("Runner"));
+
 	}
 
 	void Update() {
@@ -36,6 +37,7 @@ public class Boss : MonoBehaviour {
 			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
 			mylight.color = Color.Lerp(mylight.color, Color.red, Time.deltaTime);
 //			GameObject.Find("")/
+			Manager.changelight = true;
 		}
 	}
 
@@ -44,8 +46,10 @@ public class Boss : MonoBehaviour {
 		if (col.gameObject.name == "Runner") {	
 			Calm();
 			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
-			mylight.color = Color.Lerp(mylight.color, Color.white, Time.deltaTime);
+			mylight.color = Color.white;
+			Manager.changelight = false;
 		}
+
 	}
 
 }

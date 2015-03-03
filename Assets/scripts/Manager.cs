@@ -7,6 +7,9 @@ public class Manager : MonoBehaviour {
 	public Map mapPrefab;
 	public Boss BossPrefab;
 	public Pizza PizzaPrefab;
+	public Light l;
+
+	public static bool changelight =false;
 
 	//member varaibles
 	private Map mapInstance;
@@ -17,12 +20,14 @@ public class Manager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		l = gameObject.GetComponentsInChildren<Light>()[0];
 		BeginGame();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(changelight) l.color = Color.Lerp(l.color, Color.red, Time.deltaTime);
+		else l.color = Color.white;
 	}
 
 	private void BeginGame () {

@@ -25,5 +25,6 @@ public class LineOfSightBossBehavior : IBossBehavior {
 		attackDirection.Normalize ();
 
 		b.transform.Translate (attackVelocity * attackDirection);
+
 	}
 }

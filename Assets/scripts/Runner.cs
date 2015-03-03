@@ -22,6 +22,7 @@ public class Runner : MonoBehaviour {
 
 	void move_character() {
 		if (Input.GetKey ("right")) {
+
 			move_right ();
 		}
 		if (Input.GetKey ("left")) {
