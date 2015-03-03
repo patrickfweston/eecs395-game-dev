@@ -9,20 +9,27 @@ public class Boss : MonoBehaviour {
 	Color calm = Color.yellow;
 	private bool wait = false;
 	private int sec = 300;
+	GameObject player;
 
 	IBossBehavior behavior; 
 
 	void Angry(){
 		Color oldColor = gameObject.renderer.material.color;
 		gameObject.renderer.material.color = Color.Lerp(oldColor, angry, Time.deltaTime * smooth);
+		l.color = Color.Lerp(l.color, Color.red, Time.deltaTime);
+		Manager.changelight = true;
 	}
 	 
 	void Calm(){
 		gameObject.renderer.material.color = calm;
+		l.color = Color.white;
+		Manager.changelight = false;
 	}
 
 	void Start() {
-		behavior = new LineOfSightBossBehavior (GameObject.Find("Runner"));
+		player = GameObject.Find("Runner");
+		l = player.GetComponentsInChildren<Light>()[0];
+		behavior = new LineOfSightBossBehavior (player);
 
 	}
 
@@ -31,19 +38,27 @@ public class Boss : MonoBehaviour {
 	}
 
 	void Update() {
-		if(wait){
-			if(sec >0){
-				sec--;
-			}
-			else { 
-				wait = false;
-				sec = 9000;
-				Debug.Log("!");
-			}
+		if(!Runner.get_status()) {
+			Angry();
+			Vector3 new_pos = player.transform.localPosition + new Vector3(5, 0 ,5);
+			gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition, new_pos, Time.deltaTime);
 		}
 
 		else {
-			behavior.Update(this);
+			Calm();
+			if(wait){
+				if(sec >0){
+					sec--;
+				}
+				else { 
+					wait = false;
+					sec = 300;
+				}
+		}
+
+			else {
+				behavior.Update(this);
+			}
 		}
 	}
 
@@ -51,23 +66,13 @@ public class Boss : MonoBehaviour {
 		if (col.gameObject.name == "Runner") {
 			Angry();
 			behavior.collideWithPlayer();
-//			GUIManager.showBribeScreen();
-
-
-			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
-			mylight.color = Color.Lerp(mylight.color, Color.red, Time.deltaTime);
-//			GameObject.Find("")/
-			Manager.changelight = true;
+			GUIManager.showBribeScreen();
 		}
 	}
 
 	void OnCollisionExit(Collision col){
-//		Debug.Log ("calm");
 		if (col.gameObject.name == "Runner") {	
-			Calm();
-			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
-			mylight.color = Color.white;
-			Manager.changelight = false;
+//			Calm();
 			wait = true;
 		}
 
