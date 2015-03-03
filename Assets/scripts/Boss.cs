@@ -7,6 +7,8 @@ public class Boss : MonoBehaviour {
 	private float smooth = 5;
 	Color angry = Color.red;
 	Color calm = Color.yellow;
+	private bool wait = false;
+	private int sec = 300;
 
 	IBossBehavior behavior; 
 
@@ -24,8 +26,25 @@ public class Boss : MonoBehaviour {
 
 	}
 
+	IEnumerator Wait(){
+		yield return new WaitForSeconds (10.0f);
+	}
+
 	void Update() {
-		behavior.Update(this);
+		if(wait){
+			if(sec >0){
+				sec--;
+			}
+			else { 
+				wait = false;
+				sec = 9000;
+				Debug.Log("!");
+			}
+		}
+
+		else {
+			behavior.Update(this);
+		}
 	}
 
 	void OnCollisionStay(Collision col){
@@ -33,6 +52,7 @@ public class Boss : MonoBehaviour {
 			Angry();
 			behavior.collideWithPlayer();
 //			GUIManager.showBribeScreen();
+
 
 			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
 			mylight.color = Color.Lerp(mylight.color, Color.red, Time.deltaTime);
@@ -48,6 +68,7 @@ public class Boss : MonoBehaviour {
 			Light mylight = col.gameObject.GetComponentsInChildren<Light>()[0];
 			mylight.color = Color.white;
 			Manager.changelight = false;
+			wait = true;
 		}
 
 	}

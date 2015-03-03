@@ -54,7 +54,7 @@ public class Manager : MonoBehaviour {
 				indexx = Random.Range(0, mapInstance.size.x-1);
 				indexz = Random.Range(0, mapInstance.size.z-1);
 				tmp = mapInstance.GetCell(new IntVector2(indexx,indexz));
-				Debug.Log("!!");
+//				Debug.Log("!!");
 			}
 
 			newpizza.transform.localPosition = tmp.transform.localPosition;

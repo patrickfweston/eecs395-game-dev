@@ -137,7 +137,7 @@ public class Map : MonoBehaviour {
 			}
 		}
 		catch(Exception){
-			Debug.Log("wrong reading file");
+//			Debug.Log("wrong reading file");
 			return false;
 
 		// From: boss-ai branch
