@@ -9,6 +9,10 @@ public class InstructionsScreen : MonoBehaviour {
 	void Start () {
 		instance = this;
 	}
+
+	void Awake() {
+		instance = this;
+	}
 	
 	// Update is called once per frame
 	void Update () {
