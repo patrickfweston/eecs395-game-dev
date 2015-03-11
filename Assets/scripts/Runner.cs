@@ -8,13 +8,20 @@ public class Runner : MonoBehaviour {
 	private static bool enabled;
 
 
+
 	void Start() {
+
+
+
 		instance = this;
 		numFood = 10;
 		enabled = true;
 	}
 
 	void Update () {
+
+
+
 		if (enabled) {
 			move_character ();
 		}

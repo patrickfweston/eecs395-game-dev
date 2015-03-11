@@ -30,7 +30,7 @@ public class Pizza : MonoBehaviour {
 			s.clip = Eating_sound;
 			s.Play();
 
-			Debug.Log("played sound");
+//			Debug.Log("played sound");
 			renderer.enabled = false;
 			gameObject.GetComponent<BoxCollider>().enabled = false;
 			yield return new WaitForSeconds(s.clip.length);
