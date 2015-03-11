@@ -11,6 +11,8 @@ public class Boss : MonoBehaviour {
 	private int sec = 300;
 	GameObject player;
 
+	public static bool enabled;
+
 	IBossBehavior behavior; 
 
 	void Angry(){
@@ -38,26 +40,23 @@ public class Boss : MonoBehaviour {
 	}
 
 	void Update() {
-		if(!Runner.get_status()) {
-			Angry();
-			Vector3 new_pos = player.transform.localPosition + new Vector3(5, 0 ,5);
-			gameObject.transform.localPosition = Vector3.Lerp(gameObject.transform.localPosition, new_pos, Time.deltaTime);
-		}
-
-		else {
-			Calm();
-			if(wait){
-				if(sec >0){
-					sec--;
+		if (enabled) {
+			if (!Runner.get_status ()) {
+				Angry ();
+				Vector3 new_pos = player.transform.localPosition + new Vector3 (5, 0, 5);
+				gameObject.transform.localPosition = Vector3.Lerp (gameObject.transform.localPosition, new_pos, Time.deltaTime);
+			} else {
+				Calm ();
+				if (wait) {
+					if (sec > 0) {
+						sec--;
+					} else { 
+						wait = false;
+						sec = 300;
+					}
+				} else {
+					behavior.Update (this);
 				}
-				else { 
-					wait = false;
-					sec = 300;
-				}
-		}
-
-			else {
-				behavior.Update(this);
 			}
 		}
 	}
@@ -76,6 +75,10 @@ public class Boss : MonoBehaviour {
 			wait = true;
 		}
 
+	}
+
+	public static void isEnabled(bool x) {
+		enabled = x;
 	}
 
 }

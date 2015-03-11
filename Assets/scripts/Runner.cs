@@ -15,11 +15,10 @@ public class Runner : MonoBehaviour {
 
 	void Start() {
 
-
+		InstructionsScreen.showInstructions ();
 
 		instance = this;
 		numFood = 10;
-		enabled = true;
 		anim = instance.justin.GetComponent<Animator> ();
 	}
 
