@@ -5,11 +5,11 @@ using System.Collections;
 public class GUIManager : MonoBehaviour {
 	
 	private static GUIManager instance;
-	public Canvas bS, bC, eW;
+	public Canvas bS, bC, eW, eL;
 	public GUIText foodCount, karmaCount, karmaTotal; 
 	public int karmaEndGameTotal;
 
-	private static Canvas bribeScreen, bribeCountdown, endWin;
+	private static Canvas bribeScreen, bribeCountdown, endWin, endLoss;
 
 	// Use this for initialization
 	void Start () {
@@ -32,6 +32,7 @@ public class GUIManager : MonoBehaviour {
 		bribeScreen = bS;
 		bribeCountdown = bC;
 		endWin = eW;
+		endLoss = eL;
 	}
 	
 	public static void updatePizzaCount(int count) {
@@ -68,6 +69,13 @@ public class GUIManager : MonoBehaviour {
 		endWin.gameObject.SetActive(true);
 		EndWin.initEndWin ();
 	}
+
+	public static void endGameLoss() {
+		endLoss.enabled = true;
+		endLoss.gameObject.SetActive(true);
+		EndLoss.initEndLoss ();
+	}
+
 
 	public static int getEndKarma() {
 		return instance.karmaEndGameTotal;
