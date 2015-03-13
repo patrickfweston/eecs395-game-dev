@@ -6,13 +6,16 @@ public class GUIManager : MonoBehaviour {
 	
 	private static GUIManager instance;
 	public Canvas bS, bC;
-	public GUIText foodCount, karmaCount; 
+	public GUIText foodCount, karmaCount, karmaTotal; 
+	public int karmaEndGameTotal;
 
 	private static Canvas bribeScreen, bribeCountdown;
 
 	// Use this for initialization
 	void Start () {
 		instance = this;
+
+		karmaTotal.text = karmaEndGameTotal.ToString ();
 
 		bribeScreen.gameObject.SetActive (false);
 		bribeCountdown.gameObject.SetActive (false);
