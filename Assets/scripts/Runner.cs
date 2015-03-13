@@ -101,6 +101,7 @@ public class Runner : MonoBehaviour {
 		karma += count;
 		GUIManager.updateKarmaCount(karma);
 
+		Debug.Log (karma.ToString ());
 		if (karma > GUIManager.getEndKarma()) {
 			GUIManager.endGameWin();
 		}
