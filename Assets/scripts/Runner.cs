@@ -98,6 +98,10 @@ public class Runner : MonoBehaviour {
 	public static void incrementKarmaBy(int count) {
 		karma += count;
 		GUIManager.updateKarmaCount(karma);
+
+		if (karma > GUIManager.getEndKarma()) {
+			GUIManager.endGameWin();
+		}
 	}
 	
 	public static void decrementKarmaBy(int count) {
