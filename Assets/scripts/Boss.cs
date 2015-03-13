@@ -65,7 +65,7 @@ public class Boss : MonoBehaviour {
 		if (col.gameObject.name == "Runner") {
 			Angry();
 			behavior.collideWithPlayer();
-			GUIManager.showBribeScreen();
+			GUIManager.endGameLoss();
 		}
 	}
 

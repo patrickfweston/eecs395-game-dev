@@ -38,6 +38,8 @@ public class Runner : MonoBehaviour {
 
 		if (enabled) {
 			move_character ();
+		} else {
+			anim.speed = 0f;
 		}
 	}
 
@@ -120,6 +122,11 @@ public class Runner : MonoBehaviour {
 	public static void incrementKarmaBy(int count) {
 		karma += count;
 		GUIManager.updateKarmaCount(karma);
+
+		Debug.Log (karma.ToString ());
+		if (karma > GUIManager.getEndKarma()) {
+			GUIManager.endGameWin();
+		}
 	}
 	
 	public static void decrementKarmaBy(int count) {
