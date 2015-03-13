@@ -14,6 +14,7 @@ public class Map : MonoBehaviour {
 	public Passage passagePrefab;
 	public Wall wallPrefab;
 	public Desk deskPrefab;
+	public Colleague matePrefab;
 	public Material roomfloormat;
 
 	private MapCell[,] cells;
@@ -101,6 +102,15 @@ public class Map : MonoBehaviour {
 		desk.transform.localPosition =
 			cell.transform.localPosition+ new Vector3(0, 1,0);
 		cell.hasdesk = true;
+		desk.transform.parent = cell.transform;
+
+		if(!otherCell.hasdesk){
+			Colleague colleague = Instantiate(matePrefab) as Colleague;
+			colleague.transform.localRotation = direction.ToRotation();
+			colleague.transform.localPosition = cell.transform.localPosition+direction.ToVector3();
+			colleague.transform.parent = desk.transform;
+
+		} 
 	}
 
 	private void CreateEdge(MapCell cell, CellDirection direction, string wall, bool room){
