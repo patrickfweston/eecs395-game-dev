@@ -28,6 +28,8 @@ public class Runner : MonoBehaviour {
 
 		if (enabled) {
 			move_character ();
+		} else {
+			anim.speed = 0f;
 		}
 	}
 
