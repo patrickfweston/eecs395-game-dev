@@ -63,6 +63,7 @@ public class Map : MonoBehaviour {
 		newCell.transform.parent = transform;
 		newCell.transform.localPosition =
 			new Vector3(coordinates.x * 2 - size.x, -0.5f, coordinates.z * 2 - size.z );
+//		newCell.gameObject.layer = LayerMask.NameToLayer("Ground");
 		return newCell;
 	}
 	
@@ -84,7 +85,9 @@ public class Map : MonoBehaviour {
 		wall.Initialize(cell, otherCell, direction);
 		wall.transform.localPosition +=
 			new Vector3(0, 1, 0);
-		
+
+//		wall.gameObject.layer = LayerMask.NameToLayer ("Obstacles");
+
 		if (otherCell != null) {
 //			otherCell.GetEdge(direction.GetOpposite()).dest();
 			wall = Instantiate(wallPrefab) as Wall;
