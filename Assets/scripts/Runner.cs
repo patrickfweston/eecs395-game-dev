@@ -148,26 +148,25 @@ public class Runner : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col){
-		Debug.Log (col.gameObject.name);
 		if (col.gameObject.name == "pizza") {
 //			Debug.Log ("got pizza");
 
-			Runner.incrementPizzaBy(1);
+			Runner.incrementPizzaBy (1);
 			script_manager.NumOfPizza--;
 //			Debug.Log(script_manager.NumOfPizza);
-			
+
 			//			source.pitch = Random.Range (lowPitchRange,highPitchRange);
 			//			float hitVol = col.relativeVelocity.magnitude * velToVol;
-			
+
 			s.clip = Eating_sound;
-			s.Play();
-			
+			s.Play ();
+
 			//			Debug.Log("played sound");
 //			renderer.enabled = false;
 //			col.gameObject.GetComponent<BoxCollider>().enabled = false;
 //			yield return new WaitForSeconds(s.clip.length);
 			//			SelfDe
-			Destroy(col.gameObject);
+			Destroy (col.gameObject);
 		}
 	}
 

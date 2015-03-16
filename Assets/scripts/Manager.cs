@@ -86,7 +86,7 @@ public class Manager : MonoBehaviour {
 			}
 
 
-			newboss.transform.localPosition = new Vector3(tmp.transform.localPosition.x, 0.1f, tmp.transform.localPosition.z);
+			newboss.transform.localPosition = new Vector3(tmp.transform.localPosition.x, 0.5f, tmp.transform.localPosition.z);
 
 
 //			newboss.transform.localPosition = tmp.transform.localPosition;

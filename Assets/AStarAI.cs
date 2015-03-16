@@ -76,6 +76,16 @@ public class AStarAI : MonoBehaviour {
 			currentWaypoint++;
 			return;
 		}
+
+		GameObject temprunner = GameObject.Find("Runner");
+		GameObject tempboss = GameObject.Find ("boss0");
+		float distanceBossRunner = Vector2.Distance (new Vector2(temprunner.transform.localPosition.x, temprunner.transform.localPosition.z), new Vector2(tempboss.transform.localPosition.x, tempboss.transform.localPosition.z));
+	
+		Debug.Log (distanceBossRunner);
+
+		if (distanceBossRunner < 1.25f) {
+			GUIManager.endGameLoss();
+		}
 	}
 
 	void OnCollisionStay(Collision col){
