@@ -99,7 +99,7 @@ public class Boss : MonoBehaviour {
 				astar.updateTargetPosition(player.transform.localPosition);
 				Debug.Log (player.transform.localPosition);
 			}
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(0.5f);
 		}
 	}
 	

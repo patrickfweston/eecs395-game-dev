@@ -27,7 +27,7 @@ public class Runner : MonoBehaviour {
 		InstructionsScreen.showInstructions ();
 
 		instance = this;
-		numFood = 10;
+		numFood = 0;
 		anim = instance.justin.GetComponent<Animator> ();
 		script_manager = manager.GetComponent<Manager>();
 	}
@@ -124,7 +124,7 @@ public class Runner : MonoBehaviour {
 		GUIManager.updateKarmaCount(karma);
 
 		Debug.Log (karma.ToString ());
-		if (karma > GUIManager.getEndKarma()) {
+		if (karma >= GUIManager.getEndKarma()) {
 			GUIManager.endGameWin();
 		}
 	}

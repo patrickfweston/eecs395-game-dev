@@ -58,6 +58,28 @@ public class GUIManager : MonoBehaviour {
 		BribeCountdown.initBribeCountdown(bribe);
 		bribeCountdown.enabled = true;
 		bribeCountdown.gameObject.SetActive(true);
+
+		// -1 -0.5 1
+		
+		// 9 -0.5 17
+		GameObject tempplayer = GameObject.Find ("Runner");
+
+		GameObject tempboss = GameObject.Find ("boss0");
+		AStarAI astar = tempboss.GetComponent<AStarAI> ();
+
+		Vector3 pos1 = new Vector3 (-1f, -0.5f, 1f);
+		Vector3 pos2 = new Vector3 (9f, -0.5f, 17f);
+
+		float distpos1 = Vector3.Distance (pos1, tempplayer.transform.localPosition);
+		float distpos2 = Vector3.Distance (pos2, tempplayer.transform.localPosition);
+
+		if (distpos1 > distpos2) {
+			astar.updateTargetPosition (pos1);
+		}
+		else {
+			astar.updateTargetPosition(pos2);
+		}
+
 	}
 
 	public static void hideBribeCountdown() {
