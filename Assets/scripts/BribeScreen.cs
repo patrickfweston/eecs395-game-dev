@@ -73,6 +73,9 @@ public class BribeScreen : MonoBehaviour {
 			Runner.decrementPizzaBy (bribe);
 			GUIManager.hideBribeScreen ();
 			GUIManager.showBribeCountdown (bribe);
+		} else if (bribe == 0) {
+			GUIManager.hideBribeScreen();
+			Runner.isEnabled(true);
 		}
 	}
 }

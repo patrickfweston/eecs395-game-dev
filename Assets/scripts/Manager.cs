@@ -15,11 +15,13 @@ public class Manager : MonoBehaviour {
 	private Map mapInstance;
 	private Pizza[] pizzas;
 	private Boss[] bosses;
+	private int original_num_pizza;
 	public int NumOfPizza;
 	public int NumOfBoss;
 
 	// Use this for initialization
 	void Start () {
+		original_num_pizza = NumOfPizza;
 		l = gameObject.GetComponentsInChildren<Light>()[0];
 		BeginGame();
 	}
@@ -28,6 +30,11 @@ public class Manager : MonoBehaviour {
 	void Update () {
 		if(changelight) l.color = Color.Lerp(l.color, Color.red, Time.deltaTime);
 		else l.color = Color.white;
+
+		if(NumOfPizza == 0){
+			NumOfPizza = original_num_pizza;
+			generate_pizza();
+		}
 	}
 
 	private void BeginGame () {
@@ -45,7 +52,7 @@ public class Manager : MonoBehaviour {
 		for (int i = 0; i < NumOfPizza; i++) {
 			Pizza newpizza = Instantiate(PizzaPrefab) as Pizza;
 			pizzas[i] = newpizza;
-			newpizza.name = "pizza" + i;
+			newpizza.name = "pizza";
 			int indexx = Random.Range(0, mapInstance.size.x-1);
 			int indexz = Random.Range(0, mapInstance.size.z-1);
 			MapCell tmp = mapInstance.GetCell(new IntVector2(indexx,indexz));
@@ -77,8 +84,12 @@ public class Manager : MonoBehaviour {
 				tmp = mapInstance.GetCell(new IntVector2(indexx,indexz));
 				Debug.Log("!!");
 			}
-			
-			newboss.transform.localPosition = tmp.transform.localPosition;
+
+
+			newboss.transform.localPosition = new Vector3(tmp.transform.localPosition.x, 0.5f, tmp.transform.localPosition.z);
+
+
+//			newboss.transform.localPosition = tmp.transform.localPosition;
 		}
 	}
 

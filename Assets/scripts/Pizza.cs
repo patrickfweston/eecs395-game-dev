@@ -3,40 +3,18 @@ using System.Collections;
 
 public class Pizza : MonoBehaviour {
 
-	public AudioClip Eating_sound;
+//	public AudioClip Eating_sound;
+//	public GameObject manager;
+//	public Manager script_manager;
+//	
+//	public AudioSource s;
 	
 	
-	public AudioSource s;
-	
-	
-	void Awake () {
-		
-//		source = GetComponent<AudioSource>();
+	void Start () {
 
 	}
 	
 
 
-	IEnumerator OnCollisionEnter(Collision col){
-//		Debug.Log ("got pizza");
-
-		if (col.gameObject.name == "Runner") {
-
-			Runner.incrementPizzaBy(1);
-
-//			source.pitch = Random.Range (lowPitchRange,highPitchRange);
-//			float hitVol = col.relativeVelocity.magnitude * velToVol;
-
-			s.clip = Eating_sound;
-			s.Play();
-
-//			Debug.Log("played sound");
-			renderer.enabled = false;
-			gameObject.GetComponent<BoxCollider>().enabled = false;
-			yield return new WaitForSeconds(s.clip.length);
-//			SelfDe
-			Destroy(gameObject);
-		}
-	}
 
 }

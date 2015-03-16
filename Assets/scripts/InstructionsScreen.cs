@@ -34,6 +34,6 @@ public class InstructionsScreen : MonoBehaviour {
 		instance.GetComponent<Canvas> ().enabled = true;
 		Runner.isEnabled (false);
 		Boss.isEnabled (false);
-		Debug.Log ("here");
+//		Debug.Log ("here");
 	}
 }
