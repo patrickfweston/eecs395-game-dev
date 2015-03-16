@@ -148,7 +148,7 @@ public class Runner : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision col){
-//		Debug.Log (col.gameObject.name);
+		Debug.Log (col.gameObject.name);
 		if (col.gameObject.name == "pizza") {
 //			Debug.Log ("got pizza");
 

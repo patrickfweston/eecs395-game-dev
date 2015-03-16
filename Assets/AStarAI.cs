@@ -78,4 +78,14 @@ public class AStarAI : MonoBehaviour {
 		}
 	}
 
+	void OnCollisionStay(Collision col){
+		Debug.Log ("collision");
+		if (col.gameObject.name == "Runner") {
+			//			Angry();
+			//			behavior.collideWithPlayer();
+			GUIManager.endGameLoss();
+		}
+	}
+
+
 } 

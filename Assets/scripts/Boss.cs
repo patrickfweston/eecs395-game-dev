@@ -75,7 +75,12 @@ public class Boss : MonoBehaviour {
 //		}
 //	}
 
+	void OnCollisionEnter(Collision col) {
+		Debug.Log ("collision");
+	}
+
 	void OnCollisionStay(Collision col){
+		Debug.Log ("collision");
 		if (col.gameObject.name == "Runner") {
 //			Angry();
 //			behavior.collideWithPlayer();
