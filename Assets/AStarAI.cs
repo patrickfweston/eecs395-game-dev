@@ -25,15 +25,24 @@ public class AStarAI : MonoBehaviour {
 	public void Start () {
 		seeker = GetComponent<Seeker>();
 		controller = GetComponent<CharacterController>();
+//		
+//		//Start a new path to the targetPosition, return the result to the OnPathComplete function
+//		seeker.StartPath (transform.position,targetPosition, OnPathComplete);
 		
-		//Start a new path to the targetPosition, return the result to the OnPathComplete function
-		seeker.StartPath (transform.position,targetPosition, OnPathComplete);
+
+//		this.updateTargetPosition (targetPosition);
 	}
 
 	public void Awake() {
 		AstarPath.active.Scan ();
 	}
-	
+
+	// Can't do multiple 
+	public void updateTargetPosition(Vector3 position) {
+		//Start a new path to the targetPosition, return the result to the OnPathComplete function
+		seeker.StartPath (transform.position, position, OnPathComplete);
+	}
+
 	public void OnPathComplete (Path p) {
 		Debug.Log ("Yay, we got a path back. Did it have an error? "+p.error);
 		if (!p.error) {
@@ -49,12 +58,12 @@ public class AStarAI : MonoBehaviour {
 			return;
 		}
 
-		Debug.Log (currentWaypoint);
-
 		if (currentWaypoint >= path.vectorPath.Count) {
 			Debug.Log ("End Of Path Reached");
 			return;
 		}
+
+		Debug.Log (currentWaypoint);
 		
 		//Direction to the next waypoint
 		Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
@@ -68,4 +77,5 @@ public class AStarAI : MonoBehaviour {
 			return;
 		}
 	}
+
 } 
