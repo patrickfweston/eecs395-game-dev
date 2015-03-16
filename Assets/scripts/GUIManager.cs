@@ -20,6 +20,7 @@ public class GUIManager : MonoBehaviour {
 		bribeScreen.gameObject.SetActive (false);
 		bribeCountdown.gameObject.SetActive (false);
 		updatePizzaCount (Runner.getFoodCount());
+
 	}
 	
 	// Update is called once per frame

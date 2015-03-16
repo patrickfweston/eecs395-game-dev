@@ -62,8 +62,6 @@ public class AStarAI : MonoBehaviour {
 			Debug.Log ("End Of Path Reached");
 			return;
 		}
-
-		Debug.Log (currentWaypoint);
 		
 		//Direction to the next waypoint
 		Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
@@ -80,8 +78,6 @@ public class AStarAI : MonoBehaviour {
 		GameObject temprunner = GameObject.Find("Runner");
 		GameObject tempboss = GameObject.Find ("boss0");
 		float distanceBossRunner = Vector2.Distance (new Vector2(temprunner.transform.localPosition.x, temprunner.transform.localPosition.z), new Vector2(tempboss.transform.localPosition.x, tempboss.transform.localPosition.z));
-	
-		Debug.Log (distanceBossRunner);
 
 		if (distanceBossRunner < 1.25f) {
 			GUIManager.endGameLoss();

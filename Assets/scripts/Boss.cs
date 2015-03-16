@@ -95,8 +95,10 @@ public class Boss : MonoBehaviour {
 	{
 		while(true)
 		{
-			astar.updateTargetPosition(player.transform.localPosition);
-			Debug.Log (player.transform.localPosition);
+			if (Runner.get_status()) {
+				astar.updateTargetPosition(player.transform.localPosition);
+				Debug.Log (player.transform.localPosition);
+			}
 			yield return new WaitForSeconds(1);
 		}
 	}

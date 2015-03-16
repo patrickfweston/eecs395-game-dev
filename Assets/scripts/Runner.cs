@@ -142,7 +142,7 @@ public class Runner : MonoBehaviour {
 		enabled = x;
 //		Debug.Log ("disabled");
 	}
-
+	
 	public static bool get_status(){
 		return enabled;
 	}
