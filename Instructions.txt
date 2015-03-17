@@ -1,0 +1,24 @@
+DCP
+Free Food At Work Instructions
+==============================
+
+General
+———————
+As an ambitious but lazy intern, your goal is to level up in the company through bribery!
+
+Use the arrow keys to navigate the office and collect free food. As you accumulate food, you'll want to visit your co-workers at their desks (by running into it) and bribe them for Kudos points or to hang out and hide from the boss. Earn enough Kudos points and you'll level up!
+
+Beware though, if the boss catches you slacking off you'll have to start all over again!
+
+Bribe Interface
+———————————————
+Using the up and down arrow keys you can select how much food you want to bribe your co-worker with. Hit enter to confirm you choice.
+
+Immediately a tradeoff screen will appear: the faster you hit enter, the more Karma you’ll get, but the quicker the boss will start to track you again. If you decide to wait in this screen (up to the amount allowed), you’ll sacrifice Karma, but the boss will move away from your location, giving you more space and time to explore.
+
+End Game
+————————
+You win the game when you reach the goal amount of Kudos, listed at the bottom of your screen. You lose the game when the boss catches you by running into you.
+
+
+
